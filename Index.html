@@ -1,1 +1,536 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Hacker Tools Directory</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  min-height:100vh;
+  color:white;
+  background:
+    radial-gradient(circle at 20% 10%, #51446b 0, transparent 35%),
+    radial-gradient(circle at 90% 20%, #453b65 0, transparent 30%),
+    linear-gradient(135deg,#111218,#27252f 50%,#16161b);
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 70%,rgba(255,100,180,.12),transparent 20%),
+    radial-gradient(circle at 80% 50%,rgba(255,180,100,.10),transparent 20%);
+}
+
+.container{
+  width:min(1100px,92%);
+  margin:auto;
+  padding:45px 0 70px;
+}
+
+.top-label{
+  text-align:center;
+  letter-spacing:6px;
+  font-size:12px;
+  opacity:.7;
+  margin-bottom:15px;
+}
+
+h1{
+  text-align:center;
+  font-family:Georgia,serif;
+  font-size:clamp(42px,8vw,78px);
+  font-style:italic;
+  text-shadow:0 5px 15px #000;
+  margin-bottom:20px;
+}
+
+.profile{
+  max-width:600px;
+  margin:0 auto 35px;
+  padding:16px 22px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(15px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  font-size:18px;
+}
+
+.profile span{
+  opacity:.8;
+}
+
+.search{
+  width:100%;
+  padding:20px 25px;
+  border-radius:45px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.09);
+  color:white;
+  font-size:18px;
+  outline:none;
+  backdrop-filter:blur(15px);
+  margin-bottom:18px;
+}
+
+.search::placeholder{
+  color:rgba(255,255,255,.65);
+}
+
+.categories{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:5px 0 25px;
+}
+
+.categories button{
+  flex-shrink:0;
+  padding:12px 20px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08);
+  color:white;
+  cursor:pointer;
+}
+
+.categories button:hover,
+.categories button.active{
+  background:rgba(255,255,255,.2);
+}
+
+.section-title{
+  font-size:24px;
+  margin:25px 0 18px;
+  letter-spacing:1px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+
+.card{
+  min-height:220px;
+  padding:23px;
+  border-radius:25px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  transition:.25s;
+  display:flex;
+  flex-direction:column;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  background:rgba(255,255,255,.13);
+}
+
+.icon{
+  font-size:35px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  font-size:21px;
+  margin-bottom:9px;
+}
+
+.card p{
+  color:rgba(255,255,255,.7);
+  line-height:1.5;
+  font-size:14px;
+  flex:1;
+}
+
+.tag{
+  display:inline-block;
+  width:max-content;
+  margin-top:15px;
+  padding:7px 11px;
+  border-radius:20px;
+  background:rgba(255,255,255,.1);
+  font-size:11px;
+  text-transform:uppercase;
+}
+
+.open-btn{
+  display:block;
+  text-align:center;
+  margin-top:15px;
+  padding:11px;
+  border-radius:15px;
+  background:rgba(255,255,255,.15);
+  color:white;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+.open-btn:hover{
+  background:rgba(255,255,255,.25);
+}
+
+.no-results{
+  text-align:center;
+  padding:40px;
+  opacity:.6;
+}
+
+footer{
+  text-align:center;
+  margin-top:55px;
+  opacity:.5;
+  font-size:13px;
+}
+
+@media(max-width:600px){
+  .container{
+    padding-top:30px;
+  }
+
+  .profile{
+    font-size:14px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="top-label">PREMIUM RESOURCES</div>
+
+<h1>AI Hacker Tools</h1>
+
+<div class="profile">
+  🤖
+  <span>300+ Free AI Tools & Resources</span>
+</div>
+
+<input
+  type="text"
+  id="search"
+  class="search"
+  placeholder="🔍  Search resources..."
+>
+
+<div class="categories" id="categories"></div>
+
+<h2 class="section-title">🔥 TRENDING TOP 12</h2>
+
+<div class="grid" id="trending"></div>
+
+<h2 class="section-title">✨ ALL AI TOOLS</h2>
+
+<div class="grid" id="allTools"></div>
+
+<div class="no-results" id="noResults" style="display:none">
+  No tools found 😿
+</div>
+
+<footer>
+  © 2026 AI Hacker Tools Directory
+</footer>
+
+</div>
+
+<script>
+
+const tools = [
+
+{
+name:"ChatGPT",
+icon:"🤖",
+category:"AI Chat",
+description:"AI assistant for questions, writing, ideas and more.",
+url:"https://chatgpt.com",
+trending:true
+},
+
+{
+name:"Gemini",
+icon:"✨",
+category:"AI Chat",
+description:"Google's AI assistant for everyday tasks.",
+url:"https://gemini.google.com",
+trending:true
+},
+
+{
+name:"Canva",
+icon:"🎨",
+category:"AI Design",
+description:"Create designs, images and presentations with AI.",
+url:"https://www.canva.com",
+trending:true
+},
+
+{
+name:"Leonardo AI",
+icon:"🖼️",
+category:"AI Image",
+description:"Generate creative AI images and artwork.",
+url:"https://leonardo.ai",
+trending:true
+},
+
+{
+name:"Runway",
+icon:"🎬",
+category:"AI Video",
+description:"Create and edit videos using generative AI.",
+url:"https://runwayml.com",
+trending:true
+},
+
+{
+name:"ElevenLabs",
+icon:"🎙️",
+category:"AI Voice",
+description:"AI voice generation and text-to-speech.",
+url:"https://elevenlabs.io",
+trending:true
+},
+
+{
+name:"Suno",
+icon:"🎵",
+category:"AI Music",
+description:"Generate songs and music using AI.",
+url:"https://suno.com",
+trending:true
+},
+
+{
+name:"Perplexity",
+icon:"🔎",
+category:"AI Search",
+description:"AI-powered search and research assistant.",
+url:"https://www.perplexity.ai",
+trending:true
+},
+
+{
+name:"Gamma",
+icon:"📊",
+category:"AI Presentation",
+description:"Create presentations and documents with AI.",
+url:"https://gamma.app",
+trending:true
+},
+
+{
+name:"CapCut",
+icon:"✂️",
+category:"AI Video",
+description:"Video editor with AI-powered creative tools.",
+url:"https://www.capcut.com",
+trending:true
+},
+
+{
+name:"Adobe Firefly",
+icon:"🔥",
+category:"AI Image",
+description:"Generate and edit creative content with AI.",
+url:"https://firefly.adobe.com",
+trending:true
+},
+
+{
+name:"Remove.bg",
+icon:"🪄",
+category:"AI Image",
+description:"Remove image backgrounds automatically.",
+url:"https://www.remove.bg",
+trending:true
+},
+
+{
+name:"QuillBot",
+icon:"✍️",
+category:"AI Writing",
+description:"AI writing and paraphrasing assistant.",
+url:"https://quillbot.com"
+},
+
+{
+name:"Grammarly",
+icon:"📝",
+category:"AI Writing",
+description:"Writing assistant for grammar and clarity.",
+url:"https://www.grammarly.com"
+},
+
+{
+name:"Codeium",
+icon:"💻",
+category:"AI Coding",
+description:"AI coding assistant for developers.",
+url:"https://codeium.com"
+},
+
+{
+name:"Pixlr",
+icon:"🌈",
+category:"AI Image",
+description:"Online photo editor with AI tools.",
+url:"https://pixlr.com"
+}
+
+];
+
+const categories = [
+"All",
+"AI Chat",
+"AI Image",
+"AI Video",
+"AI Music",
+"AI Voice",
+"AI Writing",
+"AI Coding",
+"AI Design",
+"AI Search",
+"AI Presentation"
+];
+
+let currentCategory="All";
+
+const categoryBox=document.getElementById("categories");
+
+categories.forEach((cat,index)=>{
+
+const button=document.createElement("button");
+
+button.textContent=cat;
+
+if(index===0) button.classList.add("active");
+
+button.onclick=()=>{
+
+currentCategory=cat;
+
+document.querySelectorAll(".categories button")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+render();
+
+};
+
+categoryBox.appendChild(button);
+
+});
+
+function createCard(tool){
+
+return `
+<div class="card">
+
+<div class="icon">${tool.icon}</div>
+
+<h3>${tool.name}</h3>
+
+<p>${tool.description}</p>
+
+<span class="tag">${tool.category}</span>
+
+<a
+class="open-btn"
+href="${tool.url}"
+target="_blank"
+rel="noopener noreferrer">
+Open Tool →
+</a>
+
+</div>
+`;
+
+}
+
+function render(){
+
+const search=document
+.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+let filtered=tools.filter(tool=>{
+
+const matchesCategory=
+currentCategory==="All" ||
+tool.category===currentCategory;
+
+const matchesSearch=
+tool.name.toLowerCase().includes(search) ||
+tool.category.toLowerCase().includes(search) ||
+tool.description.toLowerCase().includes(search);
+
+return matchesCategory && matchesSearch;
+
+});
+
+const trending=document.getElementById("trending");
+const allTools=document.getElementById("allTools");
+const noResults=document.getElementById("noResults");
+
+const trendingTools=filtered.filter(t=>t.trending);
+
+trending.innerHTML=trendingTools
+.slice(0,12)
+.map(createCard)
+.join("");
+
+allTools.innerHTML=filtered
+.map(createCard)
+.join("");
+
+if(filtered.length===0){
+
+noResults.style.display="block";
+
+}else{
+
+noResults.style.display="none";
+
+}
+
+}
+
+document
+.getElementById("search")
+.addEventListener("input",render);
+
+render();
+
+</script>
+
+</body>
+</html>
